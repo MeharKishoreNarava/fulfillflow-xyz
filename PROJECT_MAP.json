@@ -1,0 +1,13 @@
+{
+  "project_name": "FulfillFlow \u2014 XYZ Fulfillment Hub",
+  "type": "Static web application",
+  "run": "Open index.html or use python3 -m http.server 8000",
+  "features": [
+    "Overview",
+    "Orders",
+    "Inventory",
+    "Exceptions",
+    "Staging & courier"
+  ],
+  "dependencies": "None"
+}

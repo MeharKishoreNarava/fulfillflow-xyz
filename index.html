@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FulfillFlow — Fulfillment Hub</title>
+  <meta name="description" content="A simple fulfillment operations dashboard for XYZ e-commerce.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">F</div>
+        <div>
+          <strong>FulfillFlow</strong>
+          <span>XYZ Operations</span>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Main navigation">
+        <button class="nav-item active" data-view="dashboard"><span>⌂</span> Overview</button>
+        <button class="nav-item" data-view="orders"><span>▤</span> Orders</button>
+        <button class="nav-item" data-view="inventory"><span>◫</span> Inventory</button>
+        <button class="nav-item" data-view="exceptions"><span>!</span> Exceptions</button>
+        <button class="nav-item" data-view="staging"><span>◈</span> Staging</button>
+      </nav>
+
+      <div class="sidebar-note">
+        <div class="note-icon">✓</div>
+        <div>
+          <strong>Today's focus</strong>
+          <p>Protect priority cut-offs and clear stock issues before packing.</p>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">FulfillFlow v1.0 · Demo data</div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">SATURDAY · OCTOBER 3, 2026</div>
+          <h1 id="pageTitle">Fulfillment overview</h1>
+        </div>
+        <div class="top-actions">
+          <label class="search">
+            <span>⌕</span>
+            <input id="globalSearch" type="search" placeholder="Search orders, SKUs..." aria-label="Search">
+          </label>
+          <button class="avatar" title="Demo operator">MK</button>
+        </div>
+      </header>
+
+      <section id="view-dashboard" class="view active">
+        <div class="hero-row">
+          <div>
+            <p class="muted">Good afternoon, team.</p>
+            <h2>Keep today's orders moving.</h2>
+            <p class="subcopy">A single view of priority work, inventory risks and courier handoffs.</p>
+          </div>
+          <button class="primary" id="newIssueBtn">+ Log issue</button>
+        </div>
+
+        <div class="kpi-grid" id="kpiGrid"></div>
+
+        <div class="grid-two">
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <h3>Priority queue</h3>
+                <p>Orders that need attention first.</p>
+              </div>
+              <button class="text-btn" data-view-jump="orders">View all →</button>
+            </div>
+            <div id="priorityList" class="list"></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <h3>Operational health</h3>
+                <p>Where the process is getting stuck.</p>
+              </div>
+            </div>
+            <div id="healthList" class="health-list"></div>
+          </section>
+        </div>
+
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <h3>Today's flow</h3>
+              <p>Simple stage visibility from order received to courier handoff.</p>
+            </div>
+          </div>
+          <div id="flow" class="flow"></div>
+        </section>
+      </section>
+
+      <section id="view-orders" class="view">
+        <div class="section-toolbar">
+          <div>
+            <h2>Orders</h2>
+            <p class="subcopy">Prioritise work, spot delays and open an order for its full trail.</p>
+          </div>
+          <div class="filters">
+            <select id="orderStatusFilter">
+              <option value="all">All statuses</option>
+              <option value="Priority">Priority</option>
+              <option value="Picking">Picking</option>
+              <option value="Packing">Packing</option>
+              <option value="Staging">Staging</option>
+              <option value="Delayed">Delayed</option>
+              <option value="Shipped">Shipped</option>
+            </select>
+          </div>
+        </div>
+        <section class="panel">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Order</th><th>Customer</th><th>Channel</th><th>Items</th><th>Stage</th><th>Promise</th><th>Risk</th><th></th></tr>
+              </thead>
+              <tbody id="ordersTable"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <section id="view-inventory" class="view">
+        <div class="section-toolbar">
+          <div>
+            <h2>Inventory</h2>
+            <p class="subcopy">Catch stock mismatches before a picker reaches an empty shelf.</p>
+          </div>
+          <div class="legend"><span class="dot green"></span> Healthy <span class="dot amber"></span> Watch <span class="dot red"></span> Critical</div>
+        </div>
+        <div id="inventoryCards" class="inventory-grid"></div>
+      </section>
+
+      <section id="view-exceptions" class="view">
+        <div class="section-toolbar">
+          <div>
+            <h2>Exceptions</h2>
+            <p class="subcopy">Turn informal problems into visible, trackable actions.</p>
+          </div>
+          <button class="primary" id="newIssueBtn2">+ Log issue</button>
+        </div>
+        <div id="exceptionList" class="exception-list"></div>
+      </section>
+
+      <section id="view-staging" class="view">
+        <div class="section-toolbar">
+          <div>
+            <h2>Staging & courier</h2>
+            <p class="subcopy">Make packed boxes easy to locate and courier handoffs explicit.</p>
+          </div>
+        </div>
+        <div class="staging-grid" id="stagingGrid"></div>
+      </section>
+    </main>
+  </div>
+
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose">×</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
